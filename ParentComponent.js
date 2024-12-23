@@ -14,11 +14,11 @@ function ParentComponent () {
 };
 
 function ChildA ({sharedData3}) {
-  return <p> {sharedData3} </p>
+  return <p> Child A : {sharedData3} </p>
 }
 
 function ChildB ({sharedData4}) {
-  return <h6> {sharedData4} </h6>
+  return <h6> Child b :  {sharedData4} </h6>
 }
 
 export default ParentComponent;
