@@ -1,0 +1,297 @@
+Resolved critical account linking defect in a React/Redux enterprise admin portal by identifying and fixing a state synchronization issue where API payloads sent incorrect account data, refactoring the data flow to pass selected account objects directly through the component chain instead of relying on asynchronous Redux state reads
+
+Implemented multi-account selection feature for the CSR (Customer Service Representative) portal, enabling agents to selectively link multiple shipping/billing accounts via checkbox controls with select-all/deselect-all functionality, improving operational efficiency for bulk account management workflows
+
+Enhanced data integrity across account lookup flows by engineering composite key generation with index-based tiebreakers to guarantee unique identification of accounts sharing identical billing addresses, distribution channels, and division IDs across Registration Requests, Manual Link, and Suggested Accounts modules
+
+Maintained and extended a large-scale React/Redux application (Thermo Fisher user administration platform) across multiple feature areas including user registration workflows, account lookup flows, and CSR tooling, ensuring backward compatibility, writing unit tests with Jest/React Testing Library, and collaborating across teams to resolve production-impacting issues
+
+Modernized legacy registration platform by migrating deprecated ColdFusion microservice URLs to new RESTful endpoints, eliminating hidden POST form submissions in favor of direct URL navigation, improving maintainability and reducing technical debt across the SCMS (Supply Center Management System) workflow.
+
+Developed and maintained a multi-region, internationalized React registration application supporting localized user experiences for China (zh), Japan (jp), and other APAC markets, implementing environment-aware configurations (QA/Stage/Prod) with Redux state management, auto-registration flows, and integration with identity and visibility APIs.
+
+Improved code quality and test coverage by writing comprehensive unit tests using React Testing Library and Jest, covering form validation, data-driven edge cases, error handling, and accessibility, while enforcing code standards with ESLint, Prettier, and Husky pre-commit hooks.
+
+Resolved critical address duplication defects in a React/Redux e-commerce profile application by implementing multi-layer deduplication logic across CSR linking, API payload construction, and UI display components, preventing duplicate billing account cards and ensuring data integrity for enterprise customers.
+
+Built robust error handling for address management workflows by refactoring add/edit address flows to use React useEffect-based API response monitoring, replacing premature success notifications with accurate error/success toasts that surface backend error messages to users.
+
+Implemented multi-region identity redirect logic for Change Email, Change Phone, and Change Password features across 10+ international domains (.com, .cn, .com.cn, .kr), ensuring correct SSO/identity provider routing with dynamic successRedirectUrl support for seamless user navigation.
+
+Enhanced CSR (Customer Service Representative) tooling by adding duplicate account detection with batch-level and cross-reference deduplication during BT/ST account linking, reducing erroneous duplicate account links and improving data quality for B2B customer profiles.
+
+Designed and developed the Partner Profile Management application for internal admin users, enabling end-to-end management of B2B/B2C partner profiles, shipping accounts, vendor information, and supply centers.
+
+Built the Add Ship To Account modal with dual-mode functionality (Manual Entry & Account Lookup), integrating search APIs with radio-button-based multi-result selection and automated account linking.
+
+Implemented bulk import/export of shipping account mappings via XLSX file upload, including error handling, success notifications, and template download functionality.
+
+Developed the Vendor Information tab with async save operations for contact details, connection overview, integration types, and revenue opportunities, with real-time success/error feedback.
+
+Resolved critical state management issues across the application — fixed race conditions between Redux state updates and component lifecycle, preventing UI inconsistencies in modal workflows.
+
+Fixed radio button selection defects caused by third-party component API misuse, ensuring correct controlled component behavior across account selection flows.
+
+Implemented tab-switching state isolation, ensuring form data, search results, and selections are properly cleared when navigating between tabs to prevent stale data submission.
+
+Built robust API payload construction with proper field mapping (distributionChannel, divisionId, relatedSoldToId), ensuring correct data is sent to backend services for account linking.
+
+Added defensive error handling with optional chaining and fallback messages across reducers and containers, eliminating runtime crashes from undefined API response fields.
+
+Wrote and maintained unit tests using Jest and React Testing Library, including snapshot tests, ensuring code quality and preventing regressions across 50+ test cases.
+
+Utilized Redux for centralized state management with custom selectors, Thunk middleware for async API calls, and redux-requests for request deduplication.
+
+Developed and maintained a suite of 7 micro-frontend applications (Partners, Accounts, Registration, Dealers, Users Admin, User Profile, Cart Drawer) for Thermo Fisher Scientific's internal admin portal, enabling end-to-end customer account lifecycle management across B2B/B2C channels.
+
+Built complex account linking workflows with multi-result search, radio-button selection, and dual-mode entry (Manual Entry & Account Lookup), ensuring correct API payloads with distribution channel, division ID, and billing account mapping — directly impacting data accuracy in SAP ERP integrations.
+
+Resolved critical production defects including race conditions in Redux state management, incorrect API payload construction, and third-party component API misuse — preventing data corruption in shipping account linking and import workflows.
+
+Implemented bulk import/export functionality for shipping account mappings via XLSX file upload with async error handling, success notifications from API responses, and automatic data refresh upon completion.
+
+Ensured code quality and reliability through comprehensive unit testing with Jest and React Testing Library, snapshot testing, and proactive bug identification — reducing post-deployment defects across the application suite.
+
+I work as a **Frontend Developer** on the Thermo Fisher Scientific (TFS) Customer Service Representative (CSR) portal team, building and maintaining an enterprise-grade **React/Redux** web application used for user administration and account management.
+
+Day-to-day responsibilities include:
+
+Developing and enhancing features for the CSR admin portal using React.js, Redux, JavaScript (ES6+), SCSS, and component libraries (Komodo Design System).
+Implementing complex UI workflows such as multi-account linking, user registration request handling, and account lookup flows with proper state management.
+Building reusable components with selection controls, data validation, duplicate detection, and multi-step modal workflows.
+Collaborating with QA teams to reproduce, debug, and resolve production defects across different ERP types (SAP, E1, JDE).
+Writing and maintaining unit tests using Jest and React Testing Library to ensure code quality and regression coverage.
+Working with RESTful APIs to integrate frontend features with backend services for account search, linking, and user profile management.
+Performing code reviews, ensuring accessibility standards, and following best practices for scalable frontend architecture.
+Supporting multiple ERP system configurations (SAP_PR1, Global_E1, E1_LATAM, JDE) with conditional UI logic and feature toggling.
+Key skills used daily: React.js, Redux, JavaScript/ES6+, SCSS/CSS, Jest, Git, REST APIs, Agile/Scrum, debugging, cross-browser testing, component-driven development.
+  JS :-- Core JS   / VBScript//ActionScript//JavaScript 1.1 ...1.5.1.6.1.7
+                                                               ES5 ES6 ES7
+     <script>  // Free Style Code // Functional Approach
+             function hello(){
+                         alert();
+                       }
+             hello();
+             document.getElementById()
+     </script>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Lib / Framework :--> 
+
+ JavaScript/ ECMAScript:--> Core JavaScript(console/err) + DOM Lib (document/navigator/window)
+                               		                          (browser)
+
+                                                                     React
+
+                          Separate Responsibility                   Separate Responsibility
+                                                                      UI/UX lib
+
+
+                          lib/Framework
+                    
+                     1. react :-- Lib   :----- C :-- Component :-- View
+                     2. Angular :-- framework  :---- MVC :-- Model -- View -- Controller
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Few pointers about the JavaScript :--> 
+
+ 1. The Official Name of JavaScript is ECMAScript. 
+ 2. There are 2 type of Object in JavaScript Development :--> 
+ 
+      2.1 Internal Object :--> err/ console/windows/document/navigator
+      2.2 External Object :--->    var v=new Date(); :-- create the Object in JavaScript.
+
+  3. There are various Version of JavaScript in market :--> 
+        
+     1.1 1.2  1.3 .....1.4 ...........1.5.... 1.6 ...1.7...1.8
+   <------no support-->            ES5     ES6    ES7   ES8
+
+                                   R15     R16----R18(React)
+                               Angular1    A2-----A18 (Angular)A21
+                                 Vue1-2x   Vue3     (Vue)
+
+4. JavaScript Lib have 2 parts which is using for Dev 
+
+       JS= Core JS(Core JS Logic)  +  DOM JS (DOM Manipulations/ Add on)
+
+5.There are various framework based on JS/ES in Market :--> 
+
+      1. React/Angular/Extjs/Vue/jQuery/Backbone/Knockout/Dojo
+
+  Note :-- some of them are paid / some are open source 
+
+   Paid :-- 1. KandoUI 2. IBM Dojo 2. Extjs etc.
+
+All must be in your Cloud Machine:->
+VS code 
+Node 20x - 22x LTS (Long terms Support)
+All major Browsers 
+GIT bash 
++++++++++++++++++++++++++++++++++++++++++
+
+1. Intermediate Code Glimpses  :-- Old JS/ ES5 
+
+    1. There are 3 type of JavaScript :--> 
+ 
+                   1. Inline JS :-- bind with html element :--> <button onClick=""> </button>
+                   2. Internal JS :-- same page :--> <script>  </script>
+                   3. External JS :--  <script src="">  </script>
+2. Basics of ES6   :--> 
+     1. Class / constructor / objects
+     2. Type of Methods :--> 
+                 public (this)/ private(#) / privileged implementation(No keyword) 
+
+         expose the private outside the scope of class is called privileged 
+     3. prototype implementation
+  
+           3.1 this prototype is using to get create the extension of class.
+           3.2 this support the open close principle in JS Implementation.
+           3.3 by default the scope of prototype is public
+     4. inheritance support  :-- using the extends keyword .. support all kind of inheritance except 
+                                                              the multiple one
+     5. Abstraction 
+     6. Encapsulation 
+     7. static implementation
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+   Note :-- use prototype / inheritance/ all modifier implementation in code and finally output must 
+     be place inside the console of Browser. 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ 1. Advanced ES6   :--> 
+
+    1. Let Vs var 
+
+           1.1 var is completely replaced by the let Keyword
+           1.2 let is more powerful than var because we can set the scope of let @ different Level for Example :-> 
+                      function Level 
+                      class Level 
+                      block Level
+
+    2. Arrow Function 
+
+        1. Arrow is normal function which is representing in the form Expression. 
+        2. in JS/ES we can represent the Arrow by -> operator 
+        3. it always be execute fast as comparison of normal function implementation.
+
+    3. Spread Operator
+
+                      2.1 its represent by ...
+                      2.2 this will help to get convert the number of params in array Object.
+    4. DE structuring 
+
+       There are 2 Thing generally , we used in Development :--> 
+
+          1. Structuring   2. Destructuring
+    5. Promise API :--> Reference of Code 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ HTML5 :-->     New Basic Tag + New Form attribute For Validation + New API // App Cache // Drag & Drop(Canvas)
+                                                                      local storage/ Session Storage // inbuild Database 
+                                                                      Geolocation
+ 
+CSS 3 rule's :--> 
+
+Demo 1 :--> CSS Selector's 
+
+  1. Type of Selectors in CSS :-->
+
+    id :--- #
+    class :-- .
+    Element :-- <>
+    Attribute :-- []
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+CSS Advanced Properties & @ Rules :--> 
+
+Note :-- These Properties & rules are helping to us to do the Animation / Rotate/transform effects 
+
+@CSS3 Rules
+
+@import ---    will use to external css or as a framework in the existing project.
+@font-face --- to add the external font - it must apply towards to the website.
+@keyframe ---  This css rule will help to create the animation effect for HTML element images.
+@media ---     This is the most important rule, helping and creating the responsiveness of the application. 
+	       This rule help to device to get achieve the adaptiveness of the content with the respective resolution size of the screen.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+npx json-server db.json
+
+app.post('/users/:id/posts', (req, res) => {
+                                            const userId = req.params.id;
+                                            const { postId, content, isActive } = req.body;
+                                              // Example logic to find user and add post
+                                            const user = users.find(u => u.id === parseInt(userId));
+                                            if (user) {
+                                                        user.posts.push({ postId, content, isActive });
+                                                        res.status(201).json({ message: 'Post added', user });
+                                                      } else {
+                                                              res.status(404).json({ message: 'User not found' });
+                                                             }
+                                           });
+TypeScript:
+ 
+1) TypeScript which is itself a Javascript, developed by Microsoft.
+2) The extension of the typescript file is (.ts)
+3) There are various features provided by typescript and lag by Javascript development 
+	for eg: Modifiers, Data type, enums, various kind of functions, parameters, optional and default
+4) Typescript will always be converted into ES5 after transcompile.
+5) Nowadays, use of typescript in various projects (Angular, vue)
+6) We can install typescript using the following command as mentioned below
+	npm install -g typescript
+
+1) In the typescript implementation on top of javascript, typescript provides various kind of modifiers like private, public, protected
+
+1) setup the environment of typescript
+3) class and modifier implementation in typescript
+5) REact Portal
+6) React Next Project using typescript
+
+TypeScript Features & discussions
+ 
+1) Various data types in typescript -> string, number, any, double
+    any -> will convert automatically to respective datatype
+2) Array declaration with data type in typescript
+3) various methods in ts with parameters like default, optional parameter
+ 
+  There are three type of functions we can use in typescript development
+  3.1) Normal functions with parameters
+  3.2) function with optional parameter
+  3.3) function with default parameter
+ 
+4) Enum in typescript
+ 
+Enum is basically a custom data type, in which we will assign the constant value of the application in a block and refer that value as object in entire application.
+Redux:
+1. Redux is tiny library which is using to maintain the global state in the form of store and this state must be sharable with n number of applications 
+(React/Angular/ simultaneously)
+2. We can write redux application with consistent centralized debuggable state management.
+3. Redux can be described in 3 fundamentals : 
+	3.1 Single source of truth ( global state of application is stored in an Object tree within single store)
+	3.2 State is always read only ( state is always be readable in redux which can be change only by pure function)
+	3.3 Change are made by pure function ( state object tree is transformed by action in which reducer is called which is called the pure function 
+		and return the changed or final state.)
+	3.4 we can install the redux toolkit by the following command using npm bundler
+			npm install @reduxjs/toolkit
+			npm install react-redux
+4.Using redux we always following flux architecture as mentioned below
+	Action -> Dispatcher -> Store -> Reducer -> final return changed state which is accessible by react components.
+5.Redux itself a separate container which is managing own lifecycle to maintain all the principles based on the implementation.
+
+context Api is a mechanism in which state are managing in react level
+redux is a tiny library maintaining in global level
+now state can be shared in all application and maintain the state in application level
+
+Deep drilling -  threads are created - lifecycle hook of component - thread is alive - effect - vd
+Heap of js library impact performance - state sharing take it out from component
+
+global state - context api -  react container - state at their object - logical separation remain part of react container - State on global level or js code custom code 
+Window.location.href is not required
+Closely understand by react 
+Redux funded by fb - more comfortable to react - global level - state in the form of store - sharable store in state label - provider hook inside react and consume the store anywhere
+Angular application - ngrx - angular redux
+Internally by react component - unmount it - up again if referred in child component.
+
+1. Design Patterns:
+Design Patterns are reusable solutions to commonly occurring problems. Design patterns were started as best practices that were applied again and again to similar problems encountered in different c...
+Take the prompt function take the input from the user and process for the output.
