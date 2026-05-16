@@ -1,0 +1,106 @@
+1. Redux middleware
+2. React Function as props
+3. Higher order components
+4. Write code for applying styles to a button component from the HOC component when button is clicked.
+
+import React, { useState } from 'react';
+// HOC that adds "clicked" styles to a component
+const withClickStyles = (WrappedComponent, clickedStyles) => {
+  return (props) => {
+    const [isClicked, setIsClicked] = useState(false);
+    // Function to handle the click and trigger style change
+    const handleClick = (e) => {
+      setIsClicked(true);
+      // Ensure any original onClick prop still fires
+      if (props.onClick) {
+        props.onClick(e);
+      }
+    };
+    // Merge original styles with the "clicked" style if state is true
+    const combinedStyles = {
+      ...props.style,
+      ...(isClicked ? clickedStyles : {}),
+    };
+    return (
+      <WrappedComponent
+        {...props}
+        style={combinedStyles}
+        onClick={handleClick}
+      />
+    );
+  };
+};
+// Base Button Component
+const BaseButton = ({ style, onClick, children }) => (
+  <button style={style} onClick={onClick}>
+    {children}
+  </button>
+);
+// Enhanced component with specific "clicked" styles
+const StyledButton = withClickStyles(BaseButton, {
+  backgroundColor: 'gold',
+  color: 'black',
+  fontWeight: 'bold',
+  transform: 'scale(0.95)'
+});
+
+// Usage in an App
+export default function App() {
+  return (
+    <StyledButton style={{ padding: '10px 20px', cursor: 'pointer' }}>
+      Click to Change Style
+    </StyledButton>
+  );
+}
+
+
+5. Promises in JS. Promise.all() returns what, when one of the promise arguments fails?
+6. generator functions in JS
+7. Can we pass JS script file to HTML link tag href attribute?
+1. Experience and questions related to past project
+2. React hooks and explanation. Why functional components and hooks over class based components.
+3. Custom hooks in react
+4. Create an array of JSON objects with firstname, last name and age. Write a Button component and add functionality for the click of button it should print first name, last name and age in a table.
+
+import React, { useState } from 'react';
+const UserTableApp = () => {
+  // 1. Array of JSON objects
+  const userData = [
+    { firstName: "John", lastName: "Doe", age: 28 },
+    { firstName: "Jane", lastName: "Smith", age: 34 },
+    { firstName: "Alice", lastName: "Johnson", age: 25 }
+  ];
+  // State to control table visibility
+  const [showTable, setShowTable] = useState(false);
+  return (
+    <div style={{ padding: '20px' }}>
+      {/* 2. Button Component with click functionality */}
+      <button onClick={() => setShowTable(true)}>
+        Display User Table
+      </button>
+      {/* 3. Conditional rendering of the table */}
+      {showTable && (
+        <table border="1" style={{ marginTop: '20px', width: '100%', textAlign: 'left' }}>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userData.map((user, index) => (
+              <tr key={index}>
+                <td>{user.firstName}</td>
+                <td>{user.lastName}</td>
+                <td>{user.age}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+};
+
+export default UserTableApp;

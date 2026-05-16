@@ -1,0 +1,120 @@
+17. Explain: margin: 2px 2px 2px 2px, margin: 2px 2px 2px, margin: 2px 2px
+18. What are the value we have position and then asked explanation for position, absolute, fixed, static.
+19. Difference between inline & block in the display property.
+20. Tell me resolution size for each screen types.
+21. Difference between npm i & npm ci
+22. What are the comments you are using.
+23. What are the things you have done for deployment configuration.
+24. What are the error code we have in API response and explain it.
+25. Explan Microfrontend.
+26. What will you do if webpack file is not available.
+27. What are the configuation you did in webpack.
+28. What are the loaders you used in webpack.
+29. Explain about GEN Functions
+30. Redux
+31. Redux Middleware
+32. use of Render method
+33. Questions related to apis,headers.
+34. Write a code in React to change the background on hover
+
+import React, { useState } from 'react';
+const DynamicHover = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const style = {
+    width: '200px',
+    height: '200px',
+    backgroundColor: isHovered ? '#e74c3c' : '#2ecc71',
+    transition: 'background-color 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer'
+  };
+  return (
+    <div 
+      style={style}
+      onMouseEnter={() => setIsHovered(true)} 
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {isHovered ? 'Active!' : 'Hover Me'}
+    </div>
+  );
+};
+export default DynamicHover;
+
+35. Explain your current role in cognizant
+36. Different between promise objects, how many types of asynchronous promises we can handle in JavaScript.
+37. Js Code: Create 3 promises, reject 2 and resolve 1 promise
+
+const p1 = Promise.resolve("Success! (Resolved)");
+const p2 = Promise.reject("Error 1 (Rejected)");
+const p3 = Promise.reject("Error 2 (Rejected)");
+// Testing them
+p1.then(console.log);
+p2.catch(console.error);
+p3.catch(console.error);
+
+38. How many requests you'll see in the network tab when making a get request with no headers, how many requests for put method with headers.
+39. What is preflight?
+40. React code: Render 1 component out of three 3 components based on 3 conditions. they expect you to write clean code, use design patterns.
+write Render prop pattern for the above code.Conditional rendering in react. Write code to render 3 different components based on different string values.
+1. Render Prop Pattern
+// The Logic Provider
+const ConditionalRenderer = ({ condition, render }) => {
+  return render(condition);
+};
+
+// The Implementation
+const App = () => (
+  <ConditionalRenderer 
+    condition="loading" // Or "success", "error"
+    render={(status) => {
+      if (status === 'loading') return <LoadingComponent />;
+      if (status === 'success') return <SuccessComponent />;
+      return <ErrorComponent />;
+    }}
+  />
+);
+
+2. Strategy Pattern (Mapping Object)
+const COMPONENT_MAP = {
+  loading: <LoadingComponent />,
+  success: <SuccessComponent />,
+  error: <ErrorComponent />,
+};
+
+const MyView = ({ status }) => {
+  // Renders the component matching the status, or a default
+  return COMPONENT_MAP[status] || <DefaultComponent />;
+};
+
+41. When do we actually use useCallback
+42. Unit test cases below : There's a component taking to the redux store, one button in the component, on click of a button, it is making change(updating state) in redux store. You have to test this button click on the unit test. you have to assert that, before the click there's one piece of state and after the click there's a another piece of state. How will you do that?
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducer'; // Your actual reducer
+import MyComponent from './MyComponent';
+
+test('button click updates redux store state', () => {
+  // 1. Create a fresh store instance for the test
+  const store = configureStore({ reducer: rootReducer });
+
+  // 2. Assert initial state (Before Click)
+  expect(store.getState().counter.value).toBe(0);
+
+  // Render component wrapped in Provider
+  render(
+    <Provider store={store}>
+      <MyComponent />
+    </Provider>
+  );
+
+  // 3. Simulate button click
+  const button = screen.getByRole('button', { name: /increment/i });
+  fireEvent.click(button);
+
+  // 4. Assert updated state (After Click)
+  expect(store.getState().counter.value).toBe(1);
+});

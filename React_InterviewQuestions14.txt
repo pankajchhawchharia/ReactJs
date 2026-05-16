@@ -1,0 +1,156 @@
+67. GroupByAge Problem
+
+var groups = [
+  { name: "Devi", age: '20' },
+  { name: "Ravi", age: "30" },
+  { name: "Ram", age: '20' }
+];
+
+ 
+//Output
+{
+  "20": [
+    { "name": "Devi", "age": "20" },
+    { "name": "Ram", "age": "20" }
+  ],
+  "30": [
+    { "name": "Ravi", "age": "30" }
+  ]
+}
+
+var groupedByAge = {};
+
+groups.forEach(item => {
+  if (!groupedByAge[item.age]) {
+    groupedByAge[item.age] = [];
+  }
+  groupedByAge[item.age].push(item);
+});
+
+console.log(groupedByAge);
+
+79. Reversing string without the inbuild methods (.split('').reverse().join('')) part 1 - 343 or part 2 - 36
+
+function reverseStr(str) {
+  let newStr = '';
+  newStr = str.split('');
+  let rev = '';
+  // return str.split('').reverse().join('');
+  for(let i = newStr.length - 1;i>=0;i--) {
+    rev = rev + newStr[i];
+  }
+  return rev;
+}
+console.log(reverseStr("hello"));
+
+80. Input string. output each character occurrences - part 2 - 165
+
+function charCount(str) {
+  let obj = {};
+  for(let i = 0;i<str.length;i++) {
+    char = str[i];
+    obj[char] = (obj[char] || 0) + 1;
+  }
+  return obj;
+}
+console.log(charCount("hello")); 
+// Output: { h: 1, e: 1, l: 2, o: 1 }
+-------------- or -------------------------------------------------------
+const input = ["a","b","a","c","d","b"]; - count the individual alphabet
+const output = {};
+for (const char of input) {
+  output[char] = (output[char] || 0) + 1;
+}
+console.log(output);
+----------------------- or ----------------------
+const input = ["a","b","a","c","d","b"];
+const output = input.reduce((acc, char) => {
+  // If the character already exists in the accumulator object, increment its count
+  // Otherwise, initialize it to 1
+  acc[char] = (acc[char] || 0) + 1;
+  return acc;
+}, {}); // Start with an empty object {}
+console.log(output);
+// Output: { a: 2, b: 2, c: 1, d: 1 }
+
+95. const a = [1,5,8,3,6];
+const b = [7,9,2,4,10];
+// output = [1,2,3,4,5,6,7,8,9,10]
+answer: const output = [...a,...b].sort((x,y) => x - y);
+console.log(output);
+
+1. var a=6;
+var a=5;
+console.log(a) // 5
+
+2. a=5
+var a=6
+console.log(a) // 6
+
+96. const a = 5;
+a = 6;
+console.log(a); // TypeError: Assignment to constant variable.
+
+97. var a = 5;
+a = 6;
+console.log(a); // 6
+
+98. let a = 5;
+a = 6;
+console.log(a); // 6
+
+99. var a = 5;
+a;
+console.log(a); // 5
+
+100. const a = 5;
+a;
+console.log(a); // 5
+
+101. let a = 5;
+a;
+console.log(a); // 5
+
+102. var a;
+a = 5;
+console.log(a); // 5
+
+103. const a;
+a = 5;
+console.log(a); // SyntaxError: Missing initializer in const declaration
+
+104. let a;
+a = 5;
+console.log(a) // 5
+
+105. var ;
+a = 5;
+console.log(a); // SyntaxError: Unexpected token ';'
+
+106. a = 5;
+var a;
+console.log(a);// 5
+
+107. a = 5;
+const a; 
+console.log(a); // SyntaxError: Missing initializer in const declaration
+
+108. a = 5;
+let a;
+console.log(a); // ReferenceError: Cannot access 'a' before initialization
+
+18. a = 5;
+let a = 6;
+console.log(a); // ReferenceError: Cannot access 'a' before initialization
+
+19. a = 5;
+var a = 6;
+console.log(a) // 6
+
+20. let a = 5;
+let a = 6;
+console.log(a) // SyntaxError: Identifier 'a' has already been declared
+
+21. var a = 5;
+var a = 6;
+console.log(a); // 6

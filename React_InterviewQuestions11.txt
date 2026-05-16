@@ -1,0 +1,117 @@
+5. useReducer hook and how it is used
+6. js code snippets output questions for let, const, var and assignment operators
+8. write code to find the number of duplicates in an array of elements
+
+function findDuplicates(arr) {
+    const seen = new Set();
+    const duplicates = new Set();
+
+    for (const item of arr) {
+        if (seen.has(item)) {
+            duplicates.add(item); // Item has been seen before
+        } else {
+            seen.add(item); // First time seeing this item
+        }
+    }
+    
+    return duplicates.size; // Returns the count of unique duplicate elements
+}
+
+const arr = [1, 2, 3, 4, 5, 2, 3, 6];
+console.log("Number of duplicates:", findDuplicates(arr)); // Output: 2
+
+9. CSS what are rem, em and px and differences
+10. CSS Responsive design. What are the reasons for mobile first approach.
+11. Experience with React testing library and react unit testing.
+12. Scenario: If assigned as a team lead with 2 UI developers, provide an estimate for the development of a banking transaction page where user enters payee details, amount, remarks with a submit button.
+1. what is Event looping
+2. var arr = [1,2,3,1,2,4,5,4,6,5].write code to get the output in {1:2,2:2,3:1, 4: 2, 5: 2, 6: 1}
+
+var arr = [1,2,3,1,2,4,5,4,6,5];
+// Method: Using reduce
+const counts = arr.reduce((acc, curr) => {
+  acc[curr] = (acc[curr] || 0) + 1;
+  return acc;
+}, {});
+console.log(counts);
+// Output: {1: 2, 2: 2, 3: 1, 4: 2, 5: 2, 6: 1}
+
+3. How React works
+4. what is middleware in redux
+5. explain redux
+6. context API vs prop drilling
+7. life cycle methods
+8. what is key in map method
+9. what is ADA
+10. write unit test cases to add sum of numbers - use Jest as the test runner and React Testing Library to interact with the DOM
+
+import React, { useState } from 'react';
+const SumComponent = () => {
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [result, setResult] = useState(null);
+  const handleSum = () => setResult(Number(num1) + Number(num2));
+  return (
+    <div>
+      <input data-testid="input1" type="number" onChange={(e) => setNum1(e.target.value)} />
+      <input data-testid="input2" type="number" onChange={(e) => setNum2(e.target.value)} />
+      <button onClick={handleSum}>Add</button>
+      {result !== null && <p data-testid="result">Result: {result}</p>}
+    </div>
+  );
+};
+export default SumComponent;
+
+import { render, screen, fireEvent } from '@testing-library/react';
+import SumComponent from './SumComponent';
+test('calculates the sum of two numbers when button is clicked', () => {
+  render(<SumComponent />);
+  // 1. Select the inputs and button
+  const input1 = screen.getByTestId('input1');
+  const input2 = screen.getByTestId('input2');
+  const button = screen.getByText('Add');
+  // 2. Simulate user input
+  fireEvent.change(input1, { target: { value: '10' } });
+  fireEvent.change(input2, { target: { value: '20' } });
+  // 3. Simulate button click
+  fireEvent.click(button);
+  // 4. Assert the result appears correctly
+  const result = screen.getByTestId('result');
+  expect(result.textContent).toBe('Result: 30');
+});
+
+1. let, const and var: Real time implementation and differences eg: If we are not reassign then why can't reassign specific logic
+2. Error Boundaries in functional
+4. What is Redux and how it works: Toolkit, thunk and saga
+5. Debouncing with example.
+6. Grid and Flex why and when to use?
+7. useMemo and useCallback with scenario
+8. What is React.useMemo
+9. What is the use of ViewPort
+10. If calling Lakhs of data then with pagination which method we can follow for optimization and UI should not be break and faster loading.
+11. What is Browser API
+12. Coding Challenges: [[1,2], [3,4], 5, [6,[7,8]]] loop without using flat(Infinity)
+
+const nestedArray = [[1, 2], [3, 4], 5, [6, [7, 8]]];
+function flattenArray(arr) {
+  let result = [];
+  arr.forEach(element => {
+    if (Array.isArray(element)) {
+      // Recursively flatten the inner array
+      result = result.concat(flattenArray(element));
+    } else {
+      // Push the element if it's not an array
+      result.push(element);
+    }
+  });
+  return result;
+}
+console.log(flattenArray(nestedArray));
+// Output: [1, 2, 3, 4, 5, 6, 7, 8]
+------------------------------------ or --------------------------
+const nestedArray = [[1, 2], [3, 4], 5, [6, [7, 8]]];
+const flatten = (arr) => arr.reduce((acc, val) => 
+  Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), 
+[]);
+console.log(flatten(nestedArray));
+// Output: [1, 2, 3, 4, 5, 6, 7, 8]

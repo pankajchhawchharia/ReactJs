@@ -1,0 +1,100 @@
+2. Timer: Start pause reset - React
+
+import React, { useState, useEffect, useRef } from 'react';
+const Timer = () => {
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef(null);
+  useEffect(() => {
+    if (isRunning) {
+      intervalRef.current = setInterval(() => {
+        setSeconds((s) => s + 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalRef.current);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [isRunning]);
+  const startPause = () => setIsRunning(!isRunning);
+  const reset = () => {
+    setIsRunning(false);
+    setSeconds(0);
+  };
+  return (
+    <div>
+      <h1>{seconds}s</h1>
+      <button onClick={startPause}>{isRunning ? 'Pause' : 'Start'}</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+};
+
+3. CountDown: HH:MM:SS format - eg: 01:59:59 - React
+
+import React, { useState, useEffect } from 'react';
+const CountdownTimer = ({ hours: h = 0, minutes: m = 0, seconds: s = 0 }) => {
+  // Calculate total seconds to start
+  const [totalSeconds, setTotalSeconds] = useState(h * 3600 + m * 60 + s);
+  useEffect(() => {
+    // Stop at zero
+    if (totalSeconds <= 0) return;
+    const timer = setInterval(() => {
+      setTotalSeconds((prev) => prev - 1);
+    }, 1000);
+    // Cleanup interval on unmount or when totalSeconds changes
+    return () => clearInterval(timer);
+  }, [totalSeconds]);
+  // Format seconds into HH:MM:SS
+  const formatTime = (time) => {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2, '0')}`;
+  };
+  return (
+    <div style={{ fontSize: '2rem', fontFamily: 'monospace' }}>
+      {totalSeconds > 0 ? formatTime(totalSeconds) : '00:00:00'}
+    </div>
+  );
+};
+export default CountdownTimer;
+// Usage: <CountdownTimer hours={1} minutes={59} seconds={59} />
+
+4. Describe html layout. Doctype. Semantic tags.
+5. Diff between display:none and visibility: hidden .
+6. How to include js code in html
+7. HTML form.
+8. Inline and block elements .
+9. Svg and canvas.
+10. Diff between html and html5.
+11. Web storage in html.
+12. What’s new in html5.
+13. Web workers, Cookies, Functional Programming, Object.freeze , Super keyword, Lodash library, Generator Function, Currying
+14. var, let, and const
+15. Hoisting
+16. Loops (for, while, do...while, for...of, for...in)
+17. Functions - Function declaration & expressions
+18. Arrow functions
+19. Default parameters
+20. Rest and spread operators
+21. Array Declaration and basic methods (push, pop, shift, unshift, slice, splice)
+22. Iteration (map, filter, reduce, forEach)
+23. Objects-Object creation and manipulation
+24. this keyword
+25. Creating and modifying elements
+26. Error Handling-try...catch, throw, Custom errors
+27. ES6+ Features - Destructuring, Modules (import, export), Asynchronous JavaScript, Callbacks, Promises, async / await, LocalStorage and SessionStorage, 28. JSON+Parsing and stringifying 
+29. Scopes-Global vs local, Block scope with let and const, Lexical scope
+30. call, apply, and bind
+31. Prototypes Inheritance
+32. Prototype chain
+33. Classical vs prototypal inheritance
+34. Event Loop and Concurrency
+35. Call stack
+36. Web APIs
+37. Callback queue
+38. Microtasks vs macrotasks 
+39. Memory Management & Performance
+40. Modules (ES Modules vs CommonJS)
+41. Pure functions, immutability, higher-order functions
+42. Fetch API Web APIs-Geolocation, Web Storage

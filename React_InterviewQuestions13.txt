@@ -1,0 +1,110 @@
+4. We have a array and each element should be divided by 5. If element is divided by 5 then it should be return 0 else return false. What we will use b/w forEach or Map ?
+
+Sol: const numbers = [5, 12, 10, 7];
+// Using .map() to return 0 if divisible by 5, else false
+const results = numbers.map(num => (num % 5 === 0 ? 0 : false));
+console.log(results); // [0, false, 0, false]
+
+15. Find Duplicate numbers from the given array- 
+let arr = [19, 13, 12, 35, 45, 16, 40, 35, 12, 7, 40, 35, 22, 40, 16, 27, 22];
+output = [35, 40, 16, 12]
+
+Ans : let arr = [19, 13, 12, 35, 45, 16, 40, 35, 12, 7, 40, 35, 22, 40, 16, 27, 22];
+// output = [35, 40, 16, 12]
+function duplicates(arr) {
+    const seen = new Set();
+    const dup = new Set();
+    for(let num of arr) {
+        if(seen.has(num)) {
+            dup.add(num);
+        } else {
+            seen.add(num);
+        }
+    }
+    return [...dup];
+}
+console.log(duplicates(arr));
+
+16. Write a code for promise in javascript If Random number is greater then 10 then it should be return resolved if the number is less then 10 then it should be return rejected.
+
+Ans: function greaterTen() {
+    return new Promise ((resolve,reject) => {
+        const randomNumber = Math.floor(Math.random() * 20);
+        if(randomNumber > 10) {
+            resolve("number is greater then 10");
+        }else {
+            reject("number is less then 10");
+        }
+    })
+}
+greaterTen()
+.then((message) => console.log("success",message))
+.catch((err) => console.log("error",err))
+
+39. Integrate the user name and ID in React using the given Json path: https://jsonplaceholder.typicode.com/users and add a button, 
+if we click the button name list should sort. - part 2 - 249
+ 
+import React, { useState, useEffect } from 'react';
+
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data));
+  }, []);
+
+  // Sort function
+  const sortNames = () => {
+    const sorted = [...users].sort((a, b) => a.name.localeCompare(b.name));
+    setUsers(sorted);
+  };
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h2>User List</h2>
+      <button onClick={sortNames} style={{ marginBottom: '10px' }}>
+        Sort Names Alphabetically
+      </button>
+      
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>
+            <strong>ID:</strong> {user.id} | <strong>Name:</strong> {user.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default UserList;
+
+44. Create a custom hook targets window size. when we scroll size should be change.
+
+import React, {useEffect, useState} from 'react';
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  useEffect(() => {
+const updateSize = () => {
+  setWindowSize({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  })
+};
+const handleScroll = () => {
+  updateSize();
+};
+window.addEventListener("scroll",handleScroll);
+return () => {
+  window.removeEventListener("scroll",handleScroll);
+};
+  },[]);
+  return windowSize;
+}
+export default useWindowSize;

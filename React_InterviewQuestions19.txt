@@ -1,0 +1,105 @@
+121. const passengers = [
+  {
+    id: 1,
+    passengerName: "Freddie Mercury",
+    isVegetarianOrVegan: false,
+    connectedFlights: 2,
+  },
+  {
+    id: 2,
+    passengerName: "Amy Winehouse",
+    isVegetarianOrVegan: true,
+    connectedFlights: 4,
+  },
+    {
+    id: 3,
+    passengerName: "Kurt Cobain",
+    isVegetarianOrVegan: true,
+    connectedFlights: 3,
+  },
+     {
+    id: 3,
+    passengerName: "Michael Jackson",
+    isVegetarianOrVegan: true,
+    connectedFlights: 1,
+  },
+];
+Output: Array of passenger names who has connectedFlights >2
+Sol: const result = passengers.filter(p => p.connectedFlights > 2)
+.map(p => p.passengerName);
+console.log(result);
+
+111. break array into smaller subarrays of specific size - array chunking- display data in pages or grids, processing large data in smaller batches
+Sol: function chunking(arr,size) {
+    let result =[];
+    for(let i=0;i<arr.length;i = i+size) {
+        result.push(arr.slice(i,i+size));
+    }
+    return result;
+}
+const arr = [1,2,3,4,5,6,7,8,9];
+const chunked = chunking(arr,3);
+console.log(chunked); // [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8, 9 ] ]
+
+106. custom hook to write eventlistner for resize
+Sol: import { useState, useEffect } from 'react';
+function useWindowSize() {
+  const [size, setSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return size;
+}
+export default useWindowResize;
+-----------------------------------
+
+88. bubble sort- Merge and sort without using spread operator for 2 arrays
+ const a = [1,5,8,3,6];
+const b = [7,9,2,4,10];
+// output = [1,2,3,4,5,6,7,8,9,10];
+
+sol: let arr1 = [1,4,9];
+let arr2 = [2,8,6];
+// merge
+function mergee(arr1,arr2) {
+    let newArr = [];
+    for(let i=0;i<arr1.length;i++) {
+        newArr.push(arr1[i]);  
+    }
+    for (let i =0 ;i<arr2.length;i++) {
+        newArr.push(arr2[i]);
+    }
+    // bubble sorting
+    for(let i=0;i<newArr.length-1;i++) {
+        for (let j=0;j<newArr.length-i-1;j++) {
+            if(newArr[j] > newArr[j+1] ) {
+              let temp = newArr[j];
+              newArr[j] = newArr[j+1];
+              newArr[j+1] = temp;
+            }
+        }
+    }
+    return newArr;
+}
+console.log(mergee(arr1,arr2)); // [1,2,4,6,8,9]
+--------------------------------------------------- or -------------
+const merged = [...a,...b];
+const sorted = merged.sort((x,y) => x - y);
+--------------------------------------- or -----
+const merged = a.concat(b);
+------------------------------ or ----------------
+const merged = [a,b].reduce((acc,curr) => acc.concat(curr),[]);
+----------------------------------------------------------------- or ------------
+const merged = [...new Set([...a,...b])];
+----------------------------------------------------------

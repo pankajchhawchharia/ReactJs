@@ -1,0 +1,134 @@
+81. Create todo list Add, update, delete, List them in the form of table.
+Sol: import React, { useState } from 'react';
+
+function TODO() {
+  const [todos, setTodos] = useState([]);
+  const [todoInput, setTodoInput] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const handleAddorUpdate = () => {
+    if (todoInput.trim() === '') return;
+    if (isEditing) {
+      const updatedTodos = [...todos];
+      updatedTodos[editIndex] = todoInput;
+      setTodos(updatedTodos);
+      setIsEditing(false);
+      setEditIndex(null);
+    } else {
+      setTodos([...todos, todoInput]);
+    }
+    setTodoInput('');
+  };
+  const handleEdit = (index) => {
+    setTodoInput(todos[index]);
+    setIsEditing(true);
+    setEditIndex(index);
+  };
+  const handleDelete = (index) => {
+    const updatedTodos = todos.filter((_, i) => i !== index);
+    setTodos(updatedTodos);
+    if (isEditing && index === editIndex) {
+      setIsEditing(false);
+      setTodoInput('');
+      setEditIndex(null);
+    }
+  };
+  return (
+    <div>
+      CREATE READ UPDATE DELETE CRUD OPERATION FOR TODO LIST
+      <div style={{ padding: '20px' }}>
+        <h2>Todo List</h2>
+        <input
+          type="text"
+          placeholder="enter todo"
+          value={todoInput}
+          onChange={(e) => setTodoInput(e.target.value)}
+        />
+        <button onClick={handleAddorUpdate}>
+          {isEditing ? 'Update Todo' : 'Add todo'}
+        </button>
+        {todos.length > 0 ? (
+          <table
+            border="1"
+            cellPadding="10"
+            style={{
+              marginTop: '20px',
+              width: '100%',
+              textAlign: 'left',
+            }}
+          >
+            <thead>
+              <tr>
+                <th>Sl No.</th>
+                <th>Todo</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {todos.map((todo, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{todo}</td>
+                  <td>
+                    <button onClick={() => handleEdit(index)}>edit</button>
+                    <button onClick={() => handleDelete(index)}>delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>no todo yet</p>
+        )}
+      </div>
+    </div>
+  );
+}
+export default TODO;
+
+83. usefetch custom hook
+sol: import React , {useEffect,useState} from 'react';
+
+const useFetch = (url) => {
+  const [datas,setDatas] = useState([]);
+  const [loading,setLoading] = useState(true);
+  const [error,setError] = useState('');
+
+  useEffect(() => {
+if(!url) return;
+setLoading(true);
+setError(null);
+fetch(url)
+.then((res) => res.json())
+.then((data) => {
+  setDatas(data.products);
+  setLoading(false);})
+  .catch((err) => {
+    setError(err.message);
+    setLoading(false);})
+  },[url]);
+
+  return {datas,loading,error};
+
+}
+
+export default useFetch;
+--------------------------------
+import React from 'react';
+import useFetch from './useFetch';
+
+export default function App() {
+  const { datas, error } = useFetch('https://dummyjson.com/products');
+
+  if (error) return <p>{error}</p>;
+  return (
+    <div>
+      hi
+      <ul>
+        {datas.map((data) => (
+          <li key={data.id}>{data.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}

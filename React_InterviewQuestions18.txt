@@ -1,0 +1,106 @@
+136. let str = "This is awesome day Today";
+output2 = {'This': 1, 'is': 1, 'awesome': 1, 'day': 1, 'Today': 1};
+Sol: function countWordFrequency(str) {
+  const wordCounts = {};
+  const words = str.trim().split(/\s+/);
+  for (const word of words) {
+    const normalizedWord = word.toLowerCase();
+    wordCounts[normalizedWord] = (wordCounts[normalizedWord] || 0) + 1;
+  }
+  return wordCounts;
+}
+let output2 = countWordFrequency(str); 
+console.log(output2); 
+
+135) there is a nested array of objects. Display it like similar to project repo(folder structure).. like src, public, etc.
+const projectStructure = [
+  {
+    name: 'src',
+    type: 'folder',
+    children: [
+      { name: 'assets', type: 'folder', children: [{ name: 'images', type: 'file' }, { name: 'fonts', type: 'file' }] },
+      {
+        name: 'components',
+        type: 'folder',
+        children: [
+          { name: 'Button.js', type: 'file' },
+          { name: 'Input.js', type: 'file' },
+          { name: 'modals', type: 'folder' }
+        ],
+      },
+      {
+        name: 'pages',
+        type: 'folder',
+        children: [
+          { name: 'Home.js', type: 'file' },
+          { name: 'About.js', type: 'file' },
+        ],
+      },
+      { name: 'auth', type: 'folder', children: [{ name: 'authSlice.js', type: 'file' }, { name: 'authAPI.js', type: 'file' }] },
+      { name: 'Services', type: 'folder' },
+      { 
+        name: 'hooks', 
+        type: 'folder', 
+        children: [
+          { name: 'custom hooks(useFetch,useDebounce,useForm,useWindowSize,useLocalStorage)', type: 'file' }
+        ] 
+      },
+      { name: 'store', type: 'folder' },
+      { name: 'routes', type: 'folder' },
+      { name: 'utils', type: 'folder' },
+      { name: 'context', type: 'folder' },
+      { name: 'styles', type: 'folder' },
+      { name: 'App.js', type: 'file' },
+      { name: 'index.js', type: 'file' },
+    ],
+  },
+  {
+    name: 'public',
+    type: 'folder',
+    children: [
+      { name: 'index.html', type: 'file' },
+      { name: 'favicon.ico', type: 'file' },
+    ],
+  },
+  { name: '.gitignore', type: 'file' },
+  { name: 'package.json', type: 'file' },
+  { name: 'README.md', type: 'file' },
+];
+
+function displayFolderStructure(items, indent = '') {
+  for (const item of items) {
+    console.log(`${indent}${item.name}`);
+    if (item.type === 'folder' && item.children) {
+      displayFolderStructure(item.children, indent + '  ');
+    }
+  }
+}
+console.log('Project Structure:');
+displayFolderStructure(projectStructure);
+
+Project Structure:
+src
+	assets - images,fonts
+  components
+    Button.js
+    Input.js
+	modals
+  pages
+    Home.js
+    About.js
+auth - authSlice.js,authAPI.js
+Services - 
+hooks - custom hooks(useFetch,useDebounce,useForm,useWindowSize,useLocalStorage)
+store
+routes
+utils
+context
+styles
+  App.js
+  index.js
+public
+  index.html
+  favicon.ico
+.gitignore
+package.json
+README.md

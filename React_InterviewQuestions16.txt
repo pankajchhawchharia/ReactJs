@@ -1,0 +1,129 @@
+35. let obj1 = {
+    a: 1,
+    b: 2
+}
+let obj2 = {
+    c: 3,
+    a: 2,
+    b: 3
+}
+//output {a: 2, b: 3, c: 3}
+sol:  let result = {...obj1, ...obj2};
+console.log(result); // { a: 2, b: 3, c: 3 }
+---------------- or ---------------------------
+let result = Object.assign({},obj1,obj2);
+
+36. let str = "i am john from bangalore";
+//step1: each word first letter uppercase
+//step2: reverse complete sentence
+//output: "Bangalore From John Am I"
+sol: let result = str
+.split(' ')
+.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+.reverse()
+.join(' ');
+
+46. console 1-10, 1 after 1 sec 2 then after 2 sec 3 then after 3 sec 4...upto 10
+sol: for(let i = 1;i<=10;i++){
+setTimeout(() => {
+console.log(i);
+}, i* 1000);
+
+49. what is closure
+
+Sol: function outerFunction(){
+let outerVariable = "I am outside";
+return function innerFunction() {
+console.log(outerVariable);
+}
+ }
+const closureFun = outerFunction();
+closureFun(); // I am outside
+----------------------------------------
+50. currying, add(2)(3)(4)() write a function it should be dynamic if i give add(2)(3)(4)(5)() it should work
+
+function add(x) {
+let sum = x;
+function inner(y) {
+if(y === undefined) {
+return sum;
+}
+sum = sum + y;
+return inner;
+}
+return inner;
+}
+console.log(add(2)(3)(4)()); //9
+console.log(add(2)(3)(4)(5)()); // 14 
+
+50. write a form in react name, email, phonenumber, and gender (radio button) do validation for phonenumber = 10 numbers
+Sol: import React,{useState} from 'react';
+
+function UserForm () {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    gender: ''
+  });
+  const [error, setError] = useState({});
+  const handleChange = (e) => {
+const {name,value} = e.target;
+setFormData((prev) => ({
+  ...prev,
+  [name] : value,
+}));
+  };
+  const validate = () => {
+    const newErrors = {};
+    if(formData.phone.length !== 10) {
+      newErrors.phone = 'Phone number must be exactly 10 digits';
+    } 
+    return newErrors;
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if(Object.keys(validationErrors).length > 0) {
+      setError(validationErrors);
+    }else {
+      setError({});
+      alert('Form submitted successfully');
+      console.log(formData);
+    }
+  };
+  
+  return (
+    <>
+    <p>hi user form</p>
+    <form onSubmit={handleSubmit}>
+<div>
+  <label>Name: </label>
+  <input type="text" name='name' value={formData.name} onChange={handleChange} required/>
+</div>
+<div>
+  <label>Email: </label>
+  <input type="email" name='email' value={formData.email} onChange={handleChange} required/>
+</div> 
+<div>
+  <label>Phone Number: </label>
+  <input type="text" name='phone' value={formData.phone} onChange={handleChange} required/>
+  {error.phone && <span >{error.phone}</span>}
+</div>
+<div>
+  <label>Gender: </label>
+  <label>
+    <input type='radio' name='gender' value='Male' checked={formData.gender === 'Male'}
+    onChange={handleChange}/> Male
+    </label>
+    <label>
+    <input type='radio' name='gender' value='Female' checked={formData.gender === 'Female'}
+    onChange={handleChange}/> Female
+    </label>
+</div>
+<button type='submit'>Submit</button>
+      </form>
+    </>
+  )
+}
+export default UserForm;
