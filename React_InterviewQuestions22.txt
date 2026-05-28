@@ -1,0 +1,94 @@
+1. Node.js, specifically Express.js and Loopback frameworks. They emphasized security best practices, including application security, OAuth, JWT implementation, and SSO authentication.
+2. Node.js, they focused on request prioritization in queues, covering micro and macro task queues, event loop, streams, and related concepts.
+3. JavaScript, they assessed ES6 concepts and TypeScript, with a particular focus on interfaces and types. Candidates were also tested on React API implementation and Redux Thunk.
+4. practical implementation of SOLID principles, benefits of microservices, security aspects, and service discovery. The interview included programming questions related to strings and arrays and unit testing for both frontend and backend.
+5. willing to learn and adapt quickly.
+
+1. Why Node Js is popular
+2. Is JavaScript async or sync ?
+3. How Nodejs handles non blocking async ops ?
+4. What is resultant code of typescript converted to js
+5. How Js is configured in a project
+6. Microtask vs macrotask
+7. Scopes - JavaScript uses a "Scope Chain" to resolve variable names. If the engine can't find a variable in the current scope, it looks "upward" to the outer (parent) scope, continuing until it reaches the global scope.Lexical Scope
+8. Security mechanisms - Same-Origin Policy (SOP),Content Security Policy (CSP),Cross-Site Scripting (XSS) and data injection attacks.Cross-Origin Resource Sharing (CORS) ,CSRF
+9. Security practices in code
+10. Design patterns in JavaScript
+11. Coding task to print console log with 1 sec gap where console logic is not inside function
+12. Find recurring's in an array of objects and give count
+const getCounts = (array, key) => {
+  return array.reduce((acc, item) => {
+    acc[item[key]] = (acc[item[key]] || 0) + 1;
+    return acc;
+  }, {});
+};
+
+const result = getCounts(users, 'role');
+----------------------------------------- OR ------------------
+const users = [
+  { id: 1, role: 'admin' },
+  { id: 2, role: 'user' },
+  { id: 3, role: 'admin' },
+  { id: 4, role: 'editor' },
+  { id: 5, role: 'user' }
+];
+
+const occurrenceCount = users.reduce((acc, obj) => {
+  const key = obj.role; // The property you want to count
+  acc[key] = (acc[key] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(occurrenceCount);
+// Output: { admin: 2, user: 2, editor: 1 }
+
+13. React prop drilling
+14. Redux how it works
+15. How context works
+16. How to identify and implement Middleware in Node
+
+17. console.log(a) // Uncaught ReferenceError: Cannot access 'a' before initialization
+let a  = "ABC";
+
+18. var employeeId = "1234abe";
+(function () {
+  console.log(employeeId); // undefined
+  var employeeId = "122345";
+  (function () {
+    var employeeId = "abc1234";
+  })();
+})();
+
+19. (async () => {
+  await Promise.resolve(console.log("1st"));
+  setTimeout(() => {
+    console.log("set time out");
+  });
+  await Promise.resolve(console.log("3st"));
+})(); 
+// 1st
+3st
+set time out
+
+20. <p key={1}>abdul</p>
+<p key={2}>abdul</p>
+<p key={3}>abdul</p>
+<p key={4}>abdul</p>
+<p key={5}>abdul</p>
+<p key={6}>abdul</p>
+// Is this valid? Yes. React doesn't care if the content is the same; it only cares that the key is unique among siblings.
+ 
+
+ 
+
+21. const list = [{name : "a"}, {name : "b"} , {name : "b"}];
+const uniObj = {};
+list.forEach(item => {
+  const char = item.name;
+  // If the key exists, increment it; otherwise, set it to 1
+  uniObj[char] = (uniObj[char] || 0) + 1;
+});
+console.log(uniObj); // { a: 1, b: 2 }
+
+22. uniOBj[char] = 1; // Sets value to 1
+uniOBj[char] =+ 1 // Sets the value to positive 1 (Assignment).

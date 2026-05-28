@@ -1,0 +1,19 @@
+1.AWS is an comprehensive cloud computing platform offered by the amazon, similar to GCP google platform and microsoft azur.
+2.It provide wide range of on demand IT resources like computing power, storage, databases, etc.
+3.We need to create AWS EC2 instance which is a virtual server in amazon elastic compute cloud, that allow user to run 
+application and workload on AWS cloud.
+4.AWS provide various kind of services like PASS(platform as service) SASS(software as a service) like management tool,IOT,security,
+cloude computing,deplyoment of the application, networking,databases,analytics, etc
+5.The best part using AWS cloud we can manage our virtual server with a sclability, network management in a distributed environment.
+6.VERCEL and Digital ocean are the optinal cloud.
+ 
+DEMO1:
+1.Creating an EC2(vitual server) instance.
+2.Installation of the dependent services for the fullstack deployment like jenkins, Docker, JDK, etc
+ 
+DEMO2:
+1.Creating a pipeleine in jenkins and installation of plugins like nodeJs, pipeleine,Docker,WebHook,gitlab,git,etc.
+2.Confuguartion to connect for automation gitlab to jenkins and jenkins to docker in AWS.
+ 
+DEMO3:
+1.Create a final jenkins file for end to end automation in AWS environement.

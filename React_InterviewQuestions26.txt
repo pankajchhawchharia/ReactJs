@@ -1,0 +1,269 @@
+1. basic concepts of HTML and HTML5
+
+sol: HTML (Non-Semantic): <div id="header">, <div class="footer">
+Semantic tags (like <header>, <article>, <footer>) provide meaning to the web page rather than just presentation.
+HTML5 (Semantic): <header>, <footer>, <article>, <section>, <nav>.
+
+2. Browser storage includes localStorage (persistent) and sessionStorage (tab-specific)
+
+Sol: <article>
+  <h2>Storage Example</h2>
+  <button onclick="saveData()">Save Name</button>
+</article>
+<script>
+  // Browser Storage Example
+  const saveData = () => localStorage.setItem('user', 'Pankaj');
+</script>
+
+3. Flexbox is for one-dimensional layouts, while Grid is for two-dimensional layouts. Responsiveness is achieved through Media Queries and fluid layouts.
+1. Static (Default)
+Every element is static by default. It follows the normal page flow and does not respond to top, bottom, left, or right properties.
+
+2. Relative
+The element is positioned relative to its normal position. Setting top: 10px will move it 10 pixels down from where it would usually sit, but the space it originally occupied remains reserved in the layout.
+
+CSS
+.box-relative {
+  position: relative;
+  top: 20px;
+  left: 20px;
+  background-color: lightblue;
+}
+3. Absolute
+The element is removed from the normal document flow and positioned relative to its nearest positioned ancestor (an ancestor with a position other than static). If no such ancestor exists, it uses the document body.
+
+CSS
+.container {
+  position: relative; /* This acts as the anchor */
+}
+
+.box-absolute {
+  position: absolute;
+  top: 0;
+  right: 0; /* Placed at the top-right of the container */
+}
+4. Fixed
+The element is removed from the flow and positioned relative to the browser window (viewport). It stays in the same place even when the page is scrolled. This is commonly used for navigation bars.
+
+CSS
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+5. Sticky
+A hybrid of relative and fixed. The element is treated as relative until it crosses a specified threshold (e.g., top: 0) during scrolling, at which point it "sticks" like a fixed element.
+
+CSS
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: yellow;
+}
+
+3. An inner function is simply a function defined inside another. A closure is created when that inner function "remembers" and accesses variables from its lexical scope even after the outer function has finished executing.
+
+4. promise, prototype
+
+A Promise is an object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.  The Three States:Pending: Initial state, neither fulfilled nor rejected.Fulfilled: The operation completed successfully.Rejected: The operation failed.Code Example:JavaScriptconst fetchData = new Promise((resolve, reject) => {
+    const success = true;
+    setTimeout(() => {
+        if (success) {
+            resolve("Data fetched successfully!");
+        } else {
+            reject("Error: Could not fetch data.");
+        }
+    }, 1000);
+});
+
+fetchData
+    .then(result => console.log(result)) // Handles fulfillment
+    .catch(error => console.error(error)); // Handles rejection
+2. Prototypes (Prototypal Inheritance)JavaScript is a prototype-based language. Prototypes are the mechanism by which JavaScript objects inherit features from one another.  How it works:Every object in JavaScript has a built-in property called its prototype.When you try to access a property or method that doesn't exist on an object, JavaScript looks for it in the object's prototype, then the prototype's prototype, and so on, until it finds it or reaches the end of the prototype chain.Code Example:JavaScriptfunction Person(name) {
+    this.name = name;
+}
+
+// Adding a method to the prototype so all instances share it
+Person.prototype.greet = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+const user = new Person("Pankaj");
+user.greet(); // "Hello, my name is Pankaj"
+
+console.log(Object.getPrototypeOf(user) === Person.prototype); // true
+
+5. differentiate between an inner function and a closure
+
+function outer() {
+  let count = 0; // Lexical scope
+  return function inner() { // This is a closure
+    count++;
+    return count;
+  };
+}
+const counter = outer();
+console.log(counter()); // 1
+
+6. Arrow functions do not have their own this context; they inherit it from the parent scope. Regular functions define their own this based on how they are called.
+
+7. worked with Webpack but with basic out of box configuration and wasn’t familiar with any customization
+
+The interview feedback highlights that while you have used Webpack, your experience is limited to "out of the box" configurations (like those found in create-react-app) and you lacked familiarity with manual customization.  
+
+In a senior or specialized React role, interviewers expect you to understand how to optimize the build process manually. Below is the technical breakdown of what "customization" usually entails.
+
+What is Webpack Customization?
+Webpack is a module bundler. Customization involves modifying the webpack.config.js file to handle specific file types, optimize file sizes, or manage different environments (development vs. production).  
+
+Key Areas of Customization
+Entry and Output: Defining exactly where the app starts and where the final bundle should be saved.
+
+Loaders: Telling Webpack how to process non-JavaScript files (e.g., using babel-loader for JSX or css-loader for styles).
+
+Plugins: Adding advanced functionality, like HtmlWebpackPlugin to generate your HTML file or CleanWebpackPlugin to clear old builds.
+
+Optimization: Implementing Code Splitting or Tree Shaking to keep the bundle size small.
+
+Code Example: A Customized Webpack Config
+If the interviewer asked you to create a custom configuration to handle React (JSX) and CSS, a basic customized file would look like this:
+
+JavaScript
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  // 1. Custom Entry Point
+  entry: './src/index.js',
+  
+  // 2. Custom Output Location
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.[contenthash].js', // Use hashes for better browser caching
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,    // 3. Custom Loader for React
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,         // 4. Custom Loader for Styles
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+  
+  // 5. Optimization (Code Splitting)
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+};
+
+
+8. What are the limitations and advantages of other frameworks? (React is a library, not a framework
+React.memo prevents unnecessary re-renders of functional components if props haven't changed. React.lazy allows you to render a dynamic import as a regular component (code-splitting).
+
+9. End-to-End (E2E) testing is a methodology used to test a software web application from start to finish to ensure the entire user flow works as intended. Unlike unit tests (which test a single component) or integration tests (which test how parts work together), E2E tests simulate a real user's behavior in a browser.
+
+Popular E2E Tools (The "Tools" the interviewer was looking for):
+Cypress: A modern, developer-friendly framework that runs in the same run-loop as the application.
+
+Playwright: A framework from Microsoft that allows for fast, reliable, and capable cross-browser testing.
+
+Selenium: The traditional industry standard for browser automation.
+
+Code Example: A Basic Cypress E2E Test
+If the candidate had to complete a task using an E2E tool, a test for the "Data Fetching" task mentioned in the feedback  would look like this:  
+
+JavaScript
+describe('User Management Table', () => {
+  it('should fetch data and filter correctly', () => {
+    // 1. Visit the app
+    cy.visit('http://localhost:3000');
+
+    // 2. Check if the table loaded data
+    cy.get('table tr').should('have.length.at.least', 1);
+
+    // 3. Type into the filter/search input
+    cy.get('input[placeholder="Filter..."]').type('Pankaj');
+
+    // 4. Verify the table shows the filtered result
+    cy.get('table').should('contain', 'Pankaj');
+  });
+});
+
+
+The candidate has worked with Angular and React. He was able to explain the basic difference between the two
+The candidate was familiar with Virtual DOM and terms like reconciliation and diffing algorithm but wasn’t able to explain in depth.
+The Virtual DOM is a lightweight copy of the Real DOM. Reconciliation is the process where React uses a diffing algorithm to compare the new Virtual DOM with the previous one to update only the changed parts of the Real DOM.
+
+Component Types (Class, Functional, and What is the High-Order Components)
+State management (Context API, React Hook, state)
+The candidate was familiar with all the above terms and how data flows between components. The candidate however struggled when asked specific scenario based questions.
+Function Types (react. memo and react. lazy for app performance)
+The candidate was familiar with the memoization and was able to explain the react.memo hook. The candidate also explained about react.lazy in one of his explanation for optimization of application.
+import React, { Suspense, memo } from 'react';
+
+// Memoized component
+const Child = memo(({ name }) => <div>{name}</div>);
+
+// Lazy loaded component
+const HeavyComponent = React.lazy(() => import('./HeavyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HeavyComponent />
+      <Child name="React Optimization" />
+    </Suspense>
+  );
+}
+
+What are the differences between State and Props?
+Props are read-only inputs passed from a parent to a child. State is local, mutable data managed within the component itself.
+
+Importance usage of keys
+Behavior
+Communication Skills
+Interaction Skills
+Agile Experience
+The coding task was to fetch data from API and display it in table format and filtering the data based on user input.
+import { useState, useEffect } from 'react';
+
+function UserTable() {
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    fetch('https://api.example.com/users')
+      .then(res => res.json())
+      .then(json => setData(json));
+  }, []);
+
+  const filtered = data.filter(user => 
+    user.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div>
+      <input onChange={(e) => setSearch(e.target.value)} placeholder="Filter..." />
+      <table>
+        {filtered.map(user => <tr key={user.id}><td>{user.name}</td></tr>)}
+      </table>
+    </div>
+  );
+}
+
+how to make application responsive, how react/redux works when continuous data saving is required, about difference between regular and arrow functions and how to pass context
+exposure to React and needs to understand the basic concepts to be more effective

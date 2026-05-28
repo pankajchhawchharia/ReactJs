@@ -1,0 +1,79 @@
+Experience
+
+Minimum 5 years of coding experience in ReactJS (TypeScript), HTML, CSS-Pre-processors, or CSS-in-JS in creating Enterprise Applications with high performance for Responsive Web Applications.
+Minimum 5 years of coding experience in NodeJS, JavaScript & TypeScript and NoSQL Databases.
+Developing and implementing highly responsive user interface components using React concepts. (self-contained, reusable, and testable modules and components)
+Architecting and automating the build process for production, using task runners or scripts
+Knowledge of Data Structures for TypeScript.
+Monitoring and improving front-end performance.
+Banking or Retail domains knowledge is good to have.
+Hands on experience in performance tuning, debugging, monitoring.
+ 
+
+Technical Skills
+
+Excellent knowledge developing scalable and highly available Restful APIs using NodeJS technologies
+Well versed with CI/CD principles, and actively involved in solving, troubleshooting issues in distributed services ecosystem
+Understanding of containerization, experienced in Dockers, Kubernetes.
+Exposed to API gateway integrations like 3Scale.
+Understanding of Single-Sign-on or token-based authentication (Rest, JWT, OAuth)
+Possess expert knowledge of task/message queues include but not limited to: AWS, Microsoft Azure, Pushpin and Kafka.
+Practical experience with GraphQL is good to have.
+Writing tested, idiomatic, and documented JavaScript, HTML and CSS
+Experiencing in Developing responsive web-based UI
+Have experience on Styled Components, Tailwind CSS, Material UI and other CSS-in-JS techniques
+Thorough understanding of the responsibilities of the platform, database, API, caching layer, proxies, and other web services used in the system
+Writing non-blocking code, and resorting to advanced techniques such as multi-threading, when needed
+Strong proficiency in JavaScript, including DOM manipulation and the JavaScript object model
+Documenting the code inline using JSDoc or other conventions
+Thorough understanding of React.js and its core principles
+Familiarity with modern front-end build pipelines and tools
+Experience with popular React.js workflows (such as Flux or Redux or ContextAPI or Data Structures)
+A knack for benchmarking and optimization
+Proficient with the latest versions of ECMAScript (JavaScript or TypeScript)
+Knowledge of React and common tools used in the wider React ecosystem, such as npm, yarn etc
+Familiarity with common programming tools such as RESTful APIs, TypeScript, version control software, and remote deployment tools, CI/CD tools
+An understanding of common programming paradigms and fundamental React principles, such as React components, hooks, and the React lifecycle
+Unit testing using Jest, Enzyme, Jasmine or equivalent framework
+Understanding of linter libraries (TSLINT, Prettier etc)
+ 
+
+Functional Skills
+
+Experience in following best Coding, Security, Unit testing and Documentation standards and practices
+Experience in Agile methodology.
+Ensure quality of technical and application architecture and design of systems across the organization.
+Effectively research and benchmark technology against other best in class technologies.
+ 
+
+Soft Skills
+
+Able to influence multiple teams on technical considerations, increasing their productivity and effectiveness, by sharing deep knowledge and experience.
+Self-motivator and self-starter, Ability to own and drive things without supervision and works collaboratively with the teams across the organization.
+Have excellent soft skills and interpersonal skills to interact and present the ideas to Senior and Executive management.
+Build features in Angular 21 using Signals, standalone components, and zoneless change detection  
+Dig into older code, understand it, and refactor it into something maintainable  
+Contribute to our Angular Material -> Zard UI migration  
+Build reactive data flows with NgRx and RxJS  
+Build components that look and work great on both mobile and desktop using TailwindCSS and Sass  
+Review code, share knowledge, and help shape how we build things going forward  
+
+Role Summary
+We are looking for a senior Front-end developer with experience in building production grade front-end applications, plus hands on exposure to AI tooling (e.g., OpenAI, GitHub Copilot). You will design and build front-end applications, own end to end from development to deployment on Kubernetes for these applications, and help drive observability, reliability, and security.
+Key Responsibilities
+• Design, develop, and maintain enterprise-grade front-end applications.
+• Containerize applications with Docker and manage deployments on Kubernetes.
+• Work with CI/CD pipelines for automated build, test, and deployment.
+• Implement security best practices (authN/authZ, input validation, secrets management, OWASP Top 10).
+• Use and advocate for AI assisted development tools (e.g., GitHub Copilot) to improve productivity and code quality.
+• Implement comprehensive logging, metrics, and tracing; analyze logs and telemetry to debug issues.
+• Perform root cause analysis (RCA) and implement permanent fixes.
+Qualifications
+• Strong experience with web-application frameworks like React/Angular etc. and Web technologies like (JS, TypeScript, HTML, CSS), Testing, Debugging, package management.
+• Good understanding of UI/UX design and architecture principles (Responsive Design, Atomic Design/Micro-frontends, Accessibility, Performance optimization)
+• Good hands-on experience in working with Rest API.
+• Build Tools: Vite, Webpack/Turbopack or equivalent.
+• State Management: Redux Toolkit or equivalent.
+• Experience of using front-end AI tools (prompting techniques) to increase productivity (GitHub Copilot, Cline etc, Design to Code Tools etc)
+• Experience deploying and maintaining atleast one application in production in the past is a must.
+• Experience with tools like Playwright or equivalent testing frameworks for front-end stacks.

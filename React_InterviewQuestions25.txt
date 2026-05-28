@@ -1,0 +1,68 @@
+1. TO SHOW A pop up in angular when a user reaches the bottom of the page
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
+@ViewChild('bottomAnchor') anchor!: ElementRef;
+
+ngAfterViewInit() {
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      this.showPopup = true;
+    }
+  });
+
+  observer.observe(this.anchor.nativeElement);
+}
+<div #bottomAnchor></div> at the end of your template
+
+2. to pass input text from component a to component b using redux when clicking a submit button
+// textSlice.js
+import { createSlice } from '@reduxjs/toolkit';
+
+const textSlice = createSlice({
+  name: 'textData',
+  initialState: { value: '' },
+  reducers: {
+    setText: (state, action) => {
+      state.value = action.payload; // Updates the store
+    },
+  },
+});
+
+export const { setText } = textSlice.actions;
+export default textSlice.reducer;
+
+// ComponentA.js
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setText } from './textSlice';
+
+function ComponentA() {
+  const [input, setInput] = useState('');
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    dispatch(setText(input)); // Sending data to Redux
+  };
+
+  return (
+    <div>
+      <input onChange={(e) => setInput(e.target.value)} />
+      <button onClick={handleSubmit}>Submit to Redux</button>
+    </div>
+  );
+}
+
+// ComponentB.js
+import { useSelector } from 'react-redux';
+
+function ComponentB() {
+  // Grab the specific piece of state you need
+  const message = useSelector((state) => state.textData.value);
+
+  return (
+    <div>
+      <h3>Received Message:</h3>
+      <p>{message || "Nothing received yet..."}</p>
+    </div>
+  );
+}

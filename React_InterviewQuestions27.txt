@@ -1,0 +1,47 @@
+Experience in State managements
+Strong experience in JSX, FORMS, React Routing
+React Component - Component Communication
+Advanced concept like Hooks concepts, code splitting
+API Call - Axios/Ajax/Fetch
+React Lifecycle methods
+Middleware - Thunk / Saga or custom middleware
+Flux/ Redux/ Mobix (any one)
+Knowledge of HTML5, CSS3, ES6
+Experience in Oracle is preferrable
+Expertise in ReactJS and Javascript.
+Strong knowledge of HTML.
+Experience with Restful services and Microservices architecture.
+Familiarity with web security practices (CORS, CSP, authentication/authorization).
+Proficient in Responsive Design techniques.
+Experience with CI/CD practices and Scrum Framework methodologies.
+Strong understanding of performance optimization techniques.
+Experience with Webpack.
+
+export async function getServerSideProps() {
+  // Fetch data from an external API or database
+  const res = await fetch('https://api.example.com/posts');
+  const posts = await res.json();
+
+  return {
+    props: {
+      posts, // Will be passed to the page component as props
+    },
+  };
+}
+
+Bracket pair colorizer 2
+Es7 react/redux
+Eslint
+Javascript es6
+Prettier
+Frontend Development: React.js, JavaScript, HTML5, CSS3, Bootstrap/Material UI
+
+• Have you successfully designed and deployed a large-scale enterprise application using React.js, Redux, and TypeScript from scratch?
+Exp. in Generative AI/LLM/RAG
+
+npx json-server db.json
+
+Npm run dev
+
+validation library supports in react js
+various ui/ux libraris which provides the validatiton for the react development

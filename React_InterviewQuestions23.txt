@@ -1,0 +1,63 @@
+1. process.nextTick(() => { console.log('Next Tick'); });
+setImmediate(() => { console.log('Immediate'); });
+
+Next Tick
+
+Immediate
+
+2. How would you represent the provided individual objects as a valid JSON array for a Node.js API response?
+You must wrap the objects in square brackets and separate them with commas to form a valid
+[
+  { "name": "Alice", "age": 30, "email": "alice@example.com", "city": "New York" },
+  { "name": "Bob", "age": 35, "email": "bob@example.com", "city": "Los Angeles" },
+  { "name": "Charlie", "age": 25, "email": "charlie@example.com", "city": "Chicago" }
+]
+
+3. What is the output of a.union(b) using the new Set composition methods in Node.js 22+?
+const a = new Set([1, 2, 3]);
+const b = new Map([[1, "one"], [2, "two"], [4, "four"]]);
+console.log(a.union(b));
+
+// Set(4) { 1, 2, 3, 4 }
+
+4. Identify a redundant keyword in the return statement of this asyncTask function.
+// async function asyncTask() {
+    try {
+        const valueA = await functionA();
+        const valueB = await functionB(valueA);
+        const valueC = await functionC(valueB);
+        return await functionD(valueC);
+    } catch (err) {
+        logger.error(err);
+    }
+}
+The await in return await is redundant. Since the function is already marked async, it will automatically wrap the returned value (even a promise from functionD) in a new promise.
+
+Correction: Use return functionD(valueC);.
+
+5. The following function processes tasks sequentially. If processPayment2 doesn't depend on the first payment, how can you optimize this for speed?
+// async function processPaymentAndSendEmails() {
+    await Promise.all([
+        (async () => { await processPayment1(); await sendEmail(); })(),
+        (async () => { await processPayment2(); await sendEmail(); })()
+    ]);
+}
+
+6. Write a function to group the input array ["eat", "ate", "tea", "ant", "tan", "bat"] into anagram groups.
+function groupAnagrams(strs) {
+    const map = {};
+
+    for (let str of strs) {
+        // Sort string to create a unique key: "eat" -> "aet"
+        let key = str.split('').sort().join('');
+        
+        if (!map[key]) map[key] = [];
+        map[key].push(str);
+    }
+
+    return Object.values(map);
+}
+
+const input = ["eat", "ate", "tea", "ant", "tan", "bat"];
+console.log(groupAnagrams(input));
+// Output: [ ["eat", "ate", "tea"], ["ant", "tan"], ["bat"] ]

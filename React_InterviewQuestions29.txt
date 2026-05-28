@@ -1,0 +1,33 @@
+TypeScript:
+ 
+1) TypeScript which is itself a Javascript, developed by Microsoft.
+2) The extension of the typescript file is (.ts)
+3) There are various features provided by typescript and lag by Javascript development 
+	for eg: Modifiers, Data type, enums, various kind of functions, parameters, optional and default
+4) Typescript will always be converted into ES5 after transcompile.
+5) Nowadays, use of typescript in various projects (Angular, vue)
+6) We can install typescript using the following command as mentioned below
+	npm install -g typescript
+
+1) In the typescript implementation on top of javascript, typescript provides various kind of modifiers like private, public, protected
+
+1) setup the environment of typescript
+3) class and modifier implementation in typescript
+5) REact Portal
+6) React Next Project using typescript
+
+TypeScript Features & discussions
+ 
+1) Various data types in typescript -> string, number, any, double
+    any -> will convert automatically to respective datatype
+2) Array declaration with data type in typescript
+3) various methods in ts with parameters like default, optional parameter
+ 
+  There are three type of functions we can use in typescript development
+  3.1) Normal functions with parameters
+  3.2) function with optional parameter
+  3.3) function with default parameter
+ 
+4) Enum in typescript
+ 
+Enum is basically a custom data type, in which we will assign the constant value of the application in a block and refer that value as object in entire application.

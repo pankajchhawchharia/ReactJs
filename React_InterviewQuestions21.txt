@@ -1,0 +1,181 @@
+1. Given the tokenArr, how would you extract only the unique objects based on the token property?
+const tokenArr = [
+  { token: 1, name: 'John' },
+  { token: 2, name: 'Doe' },
+  { token: 3, name: 'Doe' },
+  { token: 2, name: 'John' },
+  { token: 1, name: 'Doe' },
+];
+
+// Get unique objects based on the 'token' key
+const uniqueTokens = Array.from(new Map(tokenArr.map(item => [item.token, item])).values());
+----------------------------------- or ------------------------------------------------------
+
+const unique = [...new Map(tokenArr.map(item => [item.token, item])).values()];
+console.log(unique); // Returns unique objects for tokens 1, 2, and 3
+
+2. In your UI component, the text is inside a flex container but not centered. How do you fix it?
+const UI = () => {
+  return (
+    // Add h-screen to give the container height, and flex-1 or w-full
+    <div className="flex h-screen w-full items-center justify-center">
+      <div>Centered Element</div>
+    </div>
+  );
+};
+
+3. If the following useEffect hooks were uncommented in App.js, what would be the order of the console logs on the first render and subsequent updates?
+useEffect(() => { console.log("1"); });
+useEffect(() => { console.log("2"); }, []);
+useEffect(() => { console.log("3"); });
+First Render: 1, 2, 3 (in order of definition).
+
+Subsequent Updates: 1, 3.
+
+4. Your Checkbox component has a bug in setParentSelected where it uses prev, pData inside the setter. How do you correctly implement a "Select All" feature for clusters?
+import { useState } from "react";
+
+const Checkbox = () => {
+  // Use an array of names to track what is selected
+  const [selectedBranches, setSelectedBranches] = useState([]);
+
+  const handleParent = (cluster) => {
+    const branchNames = cluster.branches.map(b => b.name);
+    const allSelected = branchNames.every(name => selectedBranches.includes(name));
+
+    if (allSelected) {
+      // Unselect all in this cluster
+      setSelectedBranches(prev => prev.filter(name => !branchNames.includes(name)));
+    } else {
+      // Select all in this cluster (avoiding duplicates)
+      setSelectedBranches(prev => [...new Set([...prev, ...branchNames])]);
+    }
+  };
+
+  const handleChild = (branchName) => {
+    setSelectedBranches(prev => 
+      prev.includes(branchName) 
+        ? prev.filter(item => item !== branchName) 
+        : [...prev, branchName]
+    );
+  };
+
+  return (
+    <div className="p-10">
+      {data.map((cluster) => {
+        const isParentChecked = cluster.branches.every(b => selectedBranches.includes(b.name));
+        
+        return (
+          <div key={cluster.name} className="mb-4 border p-2">
+            <label className="font-bold">
+              <input
+                type="checkbox"
+                checked={isParentChecked}
+                onChange={() => handleParent(cluster)}
+              /> {cluster.name}
+            </label>
+
+            <div className="ml-6">
+              {cluster.branches.map((branch) => (
+                <div key={branch.name}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={selectedBranches.includes(branch.name)}
+                      onChange={() => handleChild(branch.name)}
+                    /> {branch.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+------------- or ----------------------------
+const Checkbox = () => {
+  const [selectedBranches, setSelectedBranches] = useState({});
+
+  const handleParent = (cluster) => {
+    const newState = { ...selectedBranches };
+    const isAllSelected = cluster.branches.every(b => newState[b.name]);
+    
+    // Toggle all branches in this cluster
+    cluster.branches.forEach(branch => {
+      newState[branch.name] = !isAllSelected;
+    });
+    setSelectedBranches(newState);
+  };
+
+  const handleChild = (name) => {
+    setSelectedBranches(prev => ({ ...prev, [name]: !prev[name] }));
+  };
+
+  return (
+    <div>
+      {data.map((cluster) => (
+        <div key={cluster.name}>
+          <h3>
+            {cluster.name} 
+            <input type="checkbox" onChange={() => handleParent(cluster)} />
+          </h3>
+          {cluster.branches.map(branch => (
+            <div key={branch.name} className="ml-4">
+              {branch.name}
+              <input 
+                type="checkbox" 
+                checked={!!selectedBranches[branch.name]} 
+                onChange={() => handleChild(branch.name)} 
+              />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+4. How do you implement the debounce function correctly in React to prevent a search function from firing on every keystroke?
+import { useCallback } from "react";
+
+// Standard debounce utility
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+// Inside a component:
+const handleSearch = (e) => console.log(e.target.value);
+
+const debouncedChange = useCallback(debounce(handleSearch, 500), []);
+
+// Usage: <input onChange={debouncedChange} />
+
+--------------- or --------------------------------
+// The Utility
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+// Inside Component
+const handleSearch = (e) => console.log(e.target.value);
+
+// Wrap in useCallback so the timer persists across renders
+const debouncedSearch = useCallback(debounce(handleSearch, 1000), []);
+
+return <input onChange={debouncedSearch} />;
+
+5. How would you transform the data array to get a flat list of all branch names?
+
+const allBranches = data.flatMap(cluster => cluster.branches.map(b => b.name));
+// Output: ["branch1", "branch2", "branch3", "branch4"]
